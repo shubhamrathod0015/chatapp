@@ -7,13 +7,13 @@ import messageRoute from "./routes/messageRoute.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { app,server } from "./socket/socket.js";
-// import path from "path";
+import path from "path";
 dotenv.config({});
 
   
 const PORT = process.env.PORT || 5000;
 
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 console.log(__dirname);
 // middleware
@@ -31,10 +31,10 @@ app.use(cors(corsOption));
 app.use("/api/v1/user",userRoute); 
 app.use("/api/v1/message",messageRoute);
  
-// app.use(express.static(path.join(__dirname, "/frontend/dist")));
-// app.get("*", (req,res)=>{
-//     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-// })
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.get("*", (req,res)=>{
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+})
 
 
 server.listen(PORT, ()=>{
